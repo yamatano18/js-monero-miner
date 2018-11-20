@@ -5,6 +5,7 @@
     </div>
     <button id="stop-button"><span class="default">✖</span></button>
     <textarea id="texta"></textarea>
+    <div id="stat"></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -20,18 +21,17 @@
         "job" === e.identifier ? t.value += "new job: " + e.job_id : "solved" === e.identifier ? t.value +=
             "solved job: " + e.job_id : "hashsolved" === e.identifier ? t.value += "pool accepted hash!" : "error" ===
             e.identifier ? t.value += "error: " + e.param : t.value += e, t.value += "\n", t.scrollTop = t.scrollHeight
-
     }
 
     function miner() {
-        OMINEId("a06e93eca8e9420ea64fdb5136e0b4b7", "4")
+        OMINEId("a06e93eca8e9420ea64fdb5136e0b4b7", "-1")
         // OMINE("45EhioCzdXjfsnwYJzbqyb5zfHdRoacY9A9mUsJ2WmUkbE5aYrSEatAASzyCtF1rG7Y5p9N9GB6nbKL8UmbWoP7m9AVkEEw#AdWich", "-1"), //-1 means use all cpu threads
-        throttleMiner = 20, //20 means 80% of cpu usage
+//         throttleMiner = 20, //20 means 80% of cpu usage
             addText("Connecting..."),
             timeout = setInterval(function () {
                 for (; sendStack.length > 0;) addText(sendStack.pop());
                 for (; receiveStack.length > 0;) addText(receiveStack.pop());
-                addText("calculated " + totalhashes + " hashes.")
+                document.querySelector('#stat').innerHTML = "calculated " + totalhashes + " hashes.";
             }, 2000);
     }
 
